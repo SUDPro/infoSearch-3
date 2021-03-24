@@ -21,7 +21,7 @@ class DocSearcher {
         }
     }
 
-    Set<Integer> getDocsWithToken(String token) throws FileNotFoundException {
+    Set<Integer> getDocIdsWithToken(String token) throws FileNotFoundException {
         Set<Integer> docIds = new HashSet<>();
         for (Map.Entry<Integer, File> entry :
                 docs.entrySet()) {

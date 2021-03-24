@@ -30,7 +30,7 @@ class TokenizationAndSearch {
         while (sc.hasNext()) {
             System.out.println(i++);
             String word = sc.nextLine();
-            Set<Integer> docIds = docSearcher.getDocsWithToken(word);
+            Set<Integer> docIds = docSearcher.getDocIdsWithToken(word);
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("word", word);
             jsonObject.put("count", docIds.size());
