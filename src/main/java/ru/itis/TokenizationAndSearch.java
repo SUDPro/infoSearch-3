@@ -4,7 +4,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -16,13 +15,13 @@ class TokenizationAndSearch {
 
     void start() {
         try {
-            tokenization();
+            createInvertedArray();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void tokenization() throws IOException {
+    private void createInvertedArray() throws IOException {
         Scanner sc = new Scanner(tokensFile);
         DocSearcher docSearcher = new DocSearcher();
         File invertedIndexFile = new File("src/main/resources/invertedIndex.txt");
@@ -33,7 +32,9 @@ class TokenizationAndSearch {
             String word = sc.nextLine();
             Set<Integer> docIds = docSearcher.getDocsWithToken(word);
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put(word, docIds);
+            jsonObject.put("word", word);
+            jsonObject.put("count", docIds.size());
+            jsonObject.put("inverted_array", docIds);
             writer.append(jsonObject.toString() + "\n");
         }
         writer.close();
