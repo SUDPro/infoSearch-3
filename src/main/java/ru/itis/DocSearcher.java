@@ -14,8 +14,7 @@ class DocSearcher {
     private Map<Integer, File> docs = new HashMap<>();
     private static Pattern wordRegex = Pattern.compile("[^а-яА-Я]");
 
-
-    DocSearcher() throws FileNotFoundException {
+    DocSearcher() {
         for (int i = 0; i < 100; i++) {
             docs.put(i, new File(String.format("src/main/resources/files/%d.txt", i)));
         }

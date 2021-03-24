@@ -38,6 +38,5 @@ class TokenizationAndSearch {
             writer.append(jsonObject.toString() + "\n");
         }
         writer.close();
-
     }
 }
