@@ -1,12 +1,7 @@
 package ru.itis;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
-import org.omg.CORBA.INTERNAL;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,7 +34,7 @@ public class Parser {
             parsedLineWithArray.set(index, getInvertedList(integers));
         }
 
-        while (parsedLineWithArray.contains(OR)){
+        while (parsedLineWithArray.contains(OR)) {
             int index = parsedLineWithArray.indexOf(OR);
             List<Integer> integersBefore = (List<Integer>) parsedLineWithArray.get(index - 1);
             List<Integer> integersAfter = (List<Integer>) parsedLineWithArray.get(index + 1);
@@ -49,7 +44,7 @@ public class Parser {
             parsedLineWithArray.remove(index - 1);
         }
 
-        while (parsedLineWithArray.contains(AND)){
+        while (parsedLineWithArray.contains(AND)) {
             int index = parsedLineWithArray.indexOf(AND);
             List<Integer> integersBefore = (List<Integer>) parsedLineWithArray.get(index - 1);
             List<Integer> integersAfter = (List<Integer>) parsedLineWithArray.get(index + 1);
@@ -61,7 +56,7 @@ public class Parser {
         System.out.println(parsedLineWithArray);
     }
 
-    List<Integer> getConcatSet(List<Integer> set1, List<Integer> set2){
+    List<Integer> getConcatSet(List<Integer> set1, List<Integer> set2) {
         Set<Integer> result = new HashSet<>();
         for (Integer number :
                 set1) {
@@ -72,16 +67,17 @@ public class Parser {
 
         for (Integer number :
                 set2) {
-            if (set1.contains(number)){
+            if (set1.contains(number)) {
                 result.add(number);
             }
         }
         return new ArrayList<>(result);
     }
+
     List<Integer> getInvertedList(List<Integer> integers) {
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
-            if (!integers.contains(i)){
+            if (!integers.contains(i)) {
                 result.add(i);
             }
         }

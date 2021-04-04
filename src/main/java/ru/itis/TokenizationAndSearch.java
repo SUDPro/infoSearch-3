@@ -13,7 +13,7 @@ import java.util.Set;
 class TokenizationAndSearch {
 
     private final File tokensFile = new File("src/main/resources/lemmas.txt");
-    private final File invertedIndexFile = new File("src/main/resources/invertedIndex.txt");
+    private final File invertedIndexFile = new File("src/main/resources/result.txt");
 
     void start() {
         try {

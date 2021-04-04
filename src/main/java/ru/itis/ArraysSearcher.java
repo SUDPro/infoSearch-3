@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class ArraysSearcher {
 
-    private static File invertedArraysFile = new File("src/main/resources/invertedIndex.txt");
+    private static File invertedArraysFile = new File("src/main/resources/result.txt");
     private Map<String, List<Integer>> wordArrayMap = new HashMap<>();
 
 
