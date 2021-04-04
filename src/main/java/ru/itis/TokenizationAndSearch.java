@@ -6,6 +6,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -23,19 +24,22 @@ class TokenizationAndSearch {
     }
 
     private void createInvertedArray() throws IOException {
-        try(Scanner sc = new Scanner(tokensFile);
-            BufferedWriter writer = new BufferedWriter(new FileWriter(invertedIndexFile, true))){
+        try (Scanner sc = new Scanner(tokensFile);
+             BufferedWriter writer = new BufferedWriter(new FileWriter(invertedIndexFile, true))) {
             DocSearcher docSearcher = new DocSearcher();
             int i = 0;
+            Set<String> words = new HashSet<>();
             while (sc.hasNext()) {
                 System.out.println(i++);
                 String word = sc.nextLine();
-                Set<Integer> docIds = docSearcher.getDocIdsWithToken(word);
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("word", word);
-                jsonObject.put("count", docIds.size());
-                jsonObject.put("inverted_array", docIds);
-                writer.append(jsonObject.toString() + "\n");
+                if (words.add(word)) {
+                    Set<Integer> docIds = docSearcher.getDocIdsWithToken(word);
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("word", word);
+                    jsonObject.put("count", docIds.size());
+                    jsonObject.put("inverted_array", docIds);
+                    writer.append(jsonObject.toString() + "\n");
+                }
             }
         }
     }
