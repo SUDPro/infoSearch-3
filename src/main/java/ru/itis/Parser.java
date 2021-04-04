@@ -73,7 +73,7 @@ public class Parser {
         for (Integer number :
                 set2) {
             if (set1.contains(number)){
-                result.contains(number);
+                result.add(number);
             }
         }
         return new ArrayList<>(result);

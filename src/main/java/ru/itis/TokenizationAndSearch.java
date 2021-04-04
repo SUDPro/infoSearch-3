@@ -12,7 +12,7 @@ import java.util.Set;
 
 class TokenizationAndSearch {
 
-    private final File tokensFile = new File("src/main/resources/tokens.txt");
+    private final File tokensFile = new File("src/main/resources/lemmas.txt");
     private final File invertedIndexFile = new File("src/main/resources/invertedIndex.txt");
 
     void start() {
@@ -27,19 +27,22 @@ class TokenizationAndSearch {
         try (Scanner sc = new Scanner(tokensFile);
              BufferedWriter writer = new BufferedWriter(new FileWriter(invertedIndexFile, true))) {
             DocSearcher docSearcher = new DocSearcher();
-            int i = 0;
+            int count = 0;
             Set<String> words = new HashSet<>();
+            Set<Integer> docIdsSet = new HashSet<>();
             while (sc.hasNext()) {
-                System.out.println(i++);
-                String word = sc.nextLine();
-                if (words.add(word)) {
-                    Set<Integer> docIds = docSearcher.getDocIdsWithToken(word);
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("word", word);
-                    jsonObject.put("count", docIds.size());
-                    jsonObject.put("inverted_array", docIds);
-                    writer.append(jsonObject.toString() + "\n");
+                System.out.println(count++);
+                String[] wordArray = sc.nextLine().split(" ");
+                for (String s : wordArray) {
+                    if (words.add(s)) {
+                        docIdsSet.addAll(docSearcher.getDocIdsWithToken(s));
+                    }
                 }
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("word", wordArray[0]);
+                jsonObject.put("count", docIdsSet.size());
+                jsonObject.put("inverted_array", docIdsSet);
+                writer.append(jsonObject.toString() + "\n");
             }
         }
     }
