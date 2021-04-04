@@ -29,8 +29,8 @@ class TokenizationAndSearch {
             DocSearcher docSearcher = new DocSearcher();
             int count = 0;
             Set<String> words = new HashSet<>();
-            Set<Integer> docIdsSet = new HashSet<>();
             while (sc.hasNext()) {
+                Set<Integer> docIdsSet = new HashSet<>();
                 System.out.println(count++);
                 String[] wordArray = sc.nextLine().split(" ");
                 for (String s : wordArray) {
